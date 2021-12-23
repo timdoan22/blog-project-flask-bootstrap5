@@ -17,5 +17,14 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/post/<int:index>')
+def get_blog(index):
+    blog_post = None
+    for post in blog_posts:
+        if post["id"] == index:
+            blog_post = post
+            bg_image = post["image"]
+    return render_template('post.html', blog_entry=blog_post)
+
 if __name__ == "__main__":
     app.run(debug=True)
