@@ -25,18 +25,16 @@ def get_blog(index):
             blog_post = post
     return render_template('post.html', blog_entry=blog_post)
 
-@app.route('/form-entry', methods=["POST"])
+@app.route('/contact', methods=["POST", "GET"])
 def receive_data():
-    username = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    message = request.form['message']
-
-    print(username)
-    print(email)
-    print(phone)
-    print(message)
-    return "<h1>Successfully sent your message</h1>"
+    if request.method == 'POST':
+        data = request.form
+        print(data["name"])
+        print(data["email"])
+        print(data["phone"])
+        print(data["message"])
+        return "<h1>Successfully sent your message</h1>"
+    return render_template("contact.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
